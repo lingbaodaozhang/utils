@@ -81,7 +81,7 @@ class Rmb
             $result[] = $decimalUnits[$key];
         }
 
-        if (strpos((string)$amount, '-') === 0) {
+        if (str_starts_with((string)$amount, '-')) {
             array_unshift($result, '负');
         }
 

@@ -13,9 +13,9 @@ use Exception;
 
 class Openssl
 {
-    protected static $publicKey;
-    protected static $privateKey;
-    protected static $splitLength = 117;
+    protected static string $publicKey = "";
+    protected static string $privateKey = "";
+    protected static int $splitLength = 117;
 
 
     /**
@@ -70,8 +70,11 @@ class Openssl
      */
     public static function decrypt(string $encrypted): array
     {
-        $crypto = '';
-        foreach (explode('.', url_safe_decode($encrypted)) as $chunk) {
+//        $crypto = "";
+	    $crypto = null;
+		$params = explode('.', url_safe_decode($encrypted));
+        foreach ($params as $chunk) {
+			if ($crypto === null) $crypto = "";
             openssl_public_decrypt(base64_decode($chunk), $decrypted, self::$publicKey);//私钥加密的内容通过公钥可用解密出来
             $crypto .= $decrypted;
         }

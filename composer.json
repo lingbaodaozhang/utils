@@ -2,8 +2,11 @@
   "name": "xy_jx/utils",
   "description": "utils🛠一个工具箱",
   "require": {
-    "php": ">=7.3.0",
-    "ext-openssl": "*"
+    "php": "8.4",
+    "ext-openssl": "*",
+    "ext-gd": "*",
+    "ext-mbstring": "*",
+    "ext-bcmath": "*"
   },
   "license": "MIT",
   "autoload": {

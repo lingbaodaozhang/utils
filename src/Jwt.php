@@ -15,35 +15,36 @@ class Jwt
      *
      * @var string
      */
-    protected static $iss = 'xy-jx';
+    protected static string $iss = 'xy-jx';
     /**
      * 接收者
      *
      * @var string
      */
-    protected static $aud = 'xy-jx';
+    protected static string $aud = 'xy-jx';
     /**
      * 签发类型
      *
      * @var string
      */
-    protected static $type = 'Bearer';
+    protected static string $type = 'Bearer';
     /**
      * token过期时间
+     *
      * @var int
      */
-    protected static $expires = 86400 * 7;
+    protected static int $expires = 86400 * 7;
     /**
      * 额外密钥必须16位字符(请自己设置并防止泄漏)
      *
      * @var string
      */
-    protected static $iv = '';//请保证16位
+    protected static string $iv = '';//请保证16位
     /**
      * 加密key
      * @var string
      */
-    protected static $key = '';
+    protected static mixed $key = '';
 
     public function __construct(array $config = [])
     {
@@ -98,8 +99,7 @@ class Jwt
      *
      * @return array|bool
      */
-    public static function getToken(array $user, array $auth = [], int $expire = 0)
-    {
+    public static function getToken(array $user, array $auth = [], int $expire = 0): bool|array {
         $time = time();
         $sigData = [
             'iss' => self::$iss,//签发者
@@ -126,12 +126,12 @@ class Jwt
      * 获取用户信息
      *
      * @param string $token
-     * @param null $uuid
-     * @param  $auth
-     * @param  $iat
+     * @param null   $uuid
+     * @param null   $auth
+     * @param null   $iat
      * @return array
      */
-    public static function getUser(string $token, &$uuid = null, &$auth = null, &$iat = null): array
+    public static function getUser(string $token, null &$uuid = null, null &$auth = null, null &$iat = null): array
     {
         $tokenData = self::checkToken($token);
         $uuid = $tokenData['uuid'] ?? null;
@@ -145,7 +145,7 @@ class Jwt
      * 获取uuid
      *
      * @param string $token
-     * @return mixed|null
+     * @return string|null
      */
     public static function getUUID(string $token)
     {

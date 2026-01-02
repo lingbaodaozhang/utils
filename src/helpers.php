@@ -156,13 +156,13 @@ if (!function_exists('location_range')) {
     /**
      * 据传入的经纬度，和距离范围，返回所在距离范围内的经纬度的取值范围
      *
-     * @param  $lng /经度
-     * @param  $lat /纬度
-     * @param float $distance 单位：km
+     * @param  $lng               /经度
+     * @param  $lat               /纬度
+     * @param float|int $distance 单位：km
      *
      * @return array
      */
-    function location_range($lng, $lat, $distance = 2): array
+    function location_range($lng, $lat, float|int $distance = 2): array
     {
         $earthRadius = 6378.137;//单位km
         $d_lng = rad2deg(
@@ -252,19 +252,6 @@ if (!function_exists('array_to_xml')) {
     }
 }
 
-if (!function_exists('xml_to_array')) {
-    /**
-     * 将XML转为array
-     *
-     * @param $xml
-     *
-     * @return mixed
-     */
-    function xml_to_array($xml)
-    {
-        return json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)), true);
-    }
-}
 if (!function_exists('generate_qrcode')) {
     /**
      * 生成二维码 （建议前端生成）
@@ -427,7 +414,7 @@ if (!function_exists('many_convert')) {
             } else { //十进制数转换成62进制
                 $ret = '';
                 do {
-                    $ret = $dict[bcmod($num, $result)] . $ret;
+                    $ret = $dict[(int)bcmod($num, $result)] . $ret;
                     $num = bcdiv($num, $result);
                 } while ($num > 0);
 
